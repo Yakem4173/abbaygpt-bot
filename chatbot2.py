@@ -35,8 +35,8 @@ def load_memory():
 def save_memory(data):
     json.dump(data, open(MEMORY_FILE, "w"))
 
-memory = load_memory()
-
+#memory = load_memory()
+memory = {}
 # 🤖 MODELS (AUTO SWITCH)
 MODELS = [
     "gemini-2.5-flash",
@@ -127,8 +127,11 @@ def main():
     # 💬 CHAT HANDLER
     app.add_handler(MessageHandler(filters.TEXT & ~filters.COMMAND, handle_message))
 
-    print("🤖 AbbayGPT is running...")
+    try:
+    print("🤖 AbbayGPT starting...")
     app.run_polling()
+except Exception as e:
+    print("🔥 CRASH ERROR:", e)
 
 if __name__ == "__main__":
     main()
