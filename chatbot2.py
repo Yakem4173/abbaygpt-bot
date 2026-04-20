@@ -35,8 +35,7 @@ def load_memory():
 def save_memory(data):
     json.dump(data, open(MEMORY_FILE, "w"))
 
-#memory = load_memory()
-memory = {}
+memory = load_memory()
 # 🤖 MODELS (AUTO SWITCH)
 MODELS = [
     "gemini-2.5-flash",
@@ -121,17 +120,14 @@ User: {user_text}
 def main():
     app = Application.builder().token(TELEGRAM_BOT_TOKEN).build()
 
-    # 👋 START HANDLER
     app.add_handler(CommandHandler("start", start))
-
-    # 💬 CHAT HANDLER
     app.add_handler(MessageHandler(filters.TEXT & ~filters.COMMAND, handle_message))
 
-    try:
-    	print("🤖 AbbayGPT starting...")
-    	app.run_polling()
-    except Exception as e:
-    	print("🔥 CRASH ERROR:", e)
+    print("🤖 AbbayGPT starting...")
+
+    app.run_polling(
+        drop_pending_updates=True
+    )
 
 if __name__ == "__main__":
     main()
