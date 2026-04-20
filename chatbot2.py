@@ -128,10 +128,10 @@ def main():
     app.add_handler(MessageHandler(filters.TEXT & ~filters.COMMAND, handle_message))
 
     try:
-    print("🤖 AbbayGPT starting...")
-    app.run_polling()
-except Exception as e:
-    print("🔥 CRASH ERROR:", e)
+    	print("🤖 AbbayGPT starting...")
+    	app.run_polling()
+    except Exception as e:
+    	print("🔥 CRASH ERROR:", e)
 
 if __name__ == "__main__":
     main()
